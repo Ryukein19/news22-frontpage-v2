@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sunday 22 November 2026 — The World in One Page</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1024px; height: 1024px; overflow: hidden; }
+  body { background: #FDF6E3; font-family: 'Noto Sans', 'DejaVu Sans', Arial, sans-serif; color: #14213D; }
+  .page { width: 1024px; height: 1024px; display: flex; flex-direction: column; }
+  .tag { display: inline-block; font-size: 8px; font-weight: 900; letter-spacing: 1px; padding: 2px 5px; border-radius: 3px; color: #fff; vertical-align: middle; }
+  .tag.conf { background: #15803D; }
+  .tag.rep { background: #D97706; }
+  .tag.claim { background: #6B7280; }
+  .region { font-size: 8px; font-weight: 900; letter-spacing: 1px; color: #6B7280; white-space: nowrap; }
+
+  /* ---- MASTHEAD ---- */
+  .masthead { height: 80px; background: #14213D; color: #FDF6E3; display: flex; align-items: center; padding: 0 18px; gap: 16px; flex: none; }
+  .masthead .paper { font-size: 11px; font-weight: 900; letter-spacing: 3px; color: #F59E0B; }
+  .masthead .date { font-size: 33px; font-weight: 900; line-height: 1; letter-spacing: 0.5px; }
+  .masthead .principle { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; color: #FDF6E3; margin-top: 4px; }
+  .masthead .legend { margin-left: auto; text-align: right; font-size: 9px; line-height: 1.5; }
+  .masthead .legend .how { font-size: 9px; font-weight: 900; letter-spacing: 1.5px; color: #F59E0B; }
+
+  /* ---- HERO LEAD: COP31 COLLAPSED ---- */
+  .hero { height: 168px; background: #C81E1E; color: #fff; display: flex; flex: none; }
+  .hero .left { flex: 1; padding: 12px 6px 10px 18px; display: flex; flex-direction: column; justify-content: center; }
+  .hero .kicker { font-size: 11px; font-weight: 900; letter-spacing: 3px; color: #FECACA; }
+  .hero h1 { font-size: 54px; font-weight: 900; line-height: 0.95; letter-spacing: -1px; margin: 3px 0 2px; }
+  .hero .sub { font-size: 14px; font-weight: 700; line-height: 1.25; }
+  .hero .sub em { color: #FECACA; font-style: normal; }
+  .hero .stats { display: flex; gap: 10px; margin-top: 8px; }
+  .hero .stat { background: rgba(0,0,0,0.28); border-radius: 6px; padding: 5px 10px; min-width: 108px; }
+  .hero .stat b { display: block; font-size: 22px; font-weight: 900; line-height: 1; }
+  .hero .stat span { font-size: 9px; font-weight: 700; letter-spacing: 0.5px; color: #FECACA; }
+  .hero .art { width: 220px; flex: none; display: flex; align-items: center; justify-content: center; }
+
+  /* ---- TOP-3 PANELS ---- */
+  .top3 { height: 158px; display: flex; gap: 8px; padding: 8px 10px 0; flex: none; }
+  .panel { flex: 1; border-radius: 8px; padding: 9px 12px; color: #fff; display: flex; flex-direction: column; overflow: hidden; }
+  .panel .kick { font-size: 9px; font-weight: 900; letter-spacing: 2px; opacity: 0.85; }
+  .panel .big { font-size: 32px; font-weight: 900; line-height: 1; margin: 3px 0 2px; }
+  .panel .head { font-size: 14px; font-weight: 900; line-height: 1.15; }
+  .panel .txt { font-size: 10.5px; line-height: 1.35; margin-top: 3px; }
+  .panel .tagrow { margin-top: auto; }
+  .p-ukr { background: #1D4ED8; }
+  .p-gulf { background: #0E7490; }
+  .p-gaza { background: #B45309; }
+
+  /* ---- GRID ---- */
+  .grid { height: 304px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; padding: 8px 10px 0; flex: none; }
+  .cell { border-radius: 7px; padding: 5px 8px 4px; display: flex; flex-direction: column; background: #fff; border: 1.5px solid #E5E7EB; overflow: hidden; }
+  .cell .motif { font-size: 21px; font-weight: 900; line-height: 1.05; letter-spacing: -0.5px; margin-top: 2px; }
+  .cell .lbl { font-size: 10px; font-weight: 700; line-height: 1.2; margin-top: 2px; }
+  .c-red { border-top: 5px solid #C81E1E; } .c-red .motif { color: #C81E1E; }
+  .c-blue { border-top: 5px solid #1D4ED8; } .c-blue .motif { color: #1D4ED8; }
+  .c-teal { border-top: 5px solid #0E7490; } .c-teal .motif { color: #0E7490; }
+  .c-amber { border-top: 5px solid #D97706; } .c-amber .motif { color: #B45309; }
+  .c-green { border-top: 5px solid #15803D; } .c-green .motif { color: #15803D; }
+  .c-purple { border-top: 5px solid #7C3AED; } .c-purple .motif { color: #7C3AED; }
+  .c-ink { border-top: 5px solid #14213D; } .c-ink .motif { color: #14213D; }
+  .c-gold { border-top: 5px solid #B45309; } .c-gold .motif { color: #92400E; }
+  .cell.legend { background: #14213D; border: none; color: #FDF6E3; justify-content: center; }
+  .cell.legend .motif { color: #F59E0B; font-size: 20px; }
+  .cell.legend .lbl { color: #FDF6E3; }
+  .cell.legend .sub2 { color: #D1D5DB; font-size: 9px; line-height: 1.25; margin-top: 2px; }
+
+  /* ---- SPORTS BAND ---- */
+  .sports { height: 112px; margin: 8px 10px 0; background: #111827; border-radius: 8px; padding: 7px 10px; flex: none; }
+  .sports .shead { display: flex; align-items: baseline; gap: 10px; }
+  .sports .shead .t { font-size: 12px; font-weight: 900; letter-spacing: 2.5px; color: #F59E0B; }
+  .sports .shead .d { font-size: 9px; font-weight: 700; color: #9CA3AF; letter-spacing: 0.5px; }
+  .sports .srow { display: flex; gap: 6px; margin-top: 5px; }
+  .sport { flex: 1; border-radius: 6px; padding: 6px 7px 5px; text-align: center; color: #fff; }
+  .sport .sc { font-size: 18px; font-weight: 900; line-height: 1; letter-spacing: -0.5px; }
+  .sport .nm { font-size: 9px; font-weight: 900; letter-spacing: 0.5px; margin-top: 3px; line-height: 1.2; }
+  .sport .nt { font-size: 8px; line-height: 1.2; opacity: 0.9; margin-top: 2px; }
+  .s-cricket { background: #15803D; } .s-f1 { background: #DC2626; }
+  .s-tennis { background: #B45309; } .s-liv { background: #991B1B; }
+  .s-leeds { background: #CA8A04; } .s-ars { background: #B91C1C; }
+  .s-city { background: #0284C7; } .s-ata { background: #1E40AF; }
+
+  /* ---- ALSO / UTC / DATE CHECK / FOOTER ---- */
+  .also { height: 48px; margin: 8px 10px 0; display: flex; gap: 8px; flex: none; }
+  .also .box { flex: 1; border: 1.5px solid #E5E7EB; border-radius: 7px; background: #fff; padding: 5px 10px; overflow: hidden; }
+  .also .box .h { font-size: 9px; font-weight: 900; letter-spacing: 2px; color: #6B7280; }
+  .also .box .b { font-size: 11px; font-weight: 700; line-height: 1.3; margin-top: 1px; }
+  .utc { height: 42px; margin: 8px 10px 0; background: #14213D; border-radius: 7px; color: #FDF6E3; display: flex; align-items: center; padding: 0 12px; gap: 12px; flex: none; overflow: hidden; }
+  .utc .h { font-size: 10px; font-weight: 900; letter-spacing: 2px; color: #F59E0B; flex: none; }
+  .utc .items { font-size: 10px; font-weight: 700; line-height: 1.4; white-space: nowrap; }
+  .utc .items b { color: #F59E0B; }
+  .datecheck { height: 38px; margin: 8px 10px 0; border: 1.5px dashed #C81E1E; border-radius: 7px; background: #FEF2F2; padding: 5px 10px; flex: none; overflow: hidden; }
+  .datecheck .h { font-size: 9px; font-weight: 900; letter-spacing: 2px; color: #C81E1E; }
+  .datecheck .b { font-size: 10px; font-weight: 700; line-height: 1.3; color: #7F1D1D; }
+  .footer { height: 34px; margin: 8px 10px 0; flex: none; display: flex; align-items: center; justify-content: space-between; font-size: 9px; color: #6B7280; font-weight: 700; }
+  .footer .r { text-align: right; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div>
+      <div class="paper">THE WORLD IN ONE PAGE</div>
+      <div class="date">SUNDAY 22 NOVEMBER 2026</div>
+      <div class="principle">34 STORIES &middot; 7 REGIONS &middot; EVERY ONE DATED SUNDAY 22 NOVEMBER 2026</div>
+    </div>
+    <div class="legend">
+      <div class="how">HOW SURE</div>
+      <div><span class="tag conf">CONFIRMED</span> 2+ sources</div>
+      <div><span class="tag rep">REPORTED</span> announced / claimed</div>
+      <div><span class="tag claim">CLAIM</span> unconfirmed</div>
+    </div>
+  </div>
+
+  <!-- HERO LEAD: COP31 COLLAPSED -->
+  <div class="hero">
+    <div class="left">
+      <div class="kicker">LEAD &middot; ANTALYA &middot; COP31</div>
+      <h1>NO DEAL.</h1>
+      <div class="sub">COP31 <em>collapses</em> — the Antalya pact is rejected at the closing plenary. First COP failure since Copenhagen 2009.</div>
+      <div class="stats">
+        <div class="stat"><b>0</b><span>FOSSIL-FUEL MENTIONS</span></div>
+        <div class="stat"><b>94</b><span>PARAGRAPHS IN DRAFT</span></div>
+        <div class="stat"><b>44+ hrs</b><span>OVERTIME, LONGEST COP</span></div>
+      </div>
+    </div>
+    <div class="art">
+      <svg width="200" height="150" viewBox="0 0 210 160" xmlns="http://www.w3.org/2000/svg">
+        <rect x="28" y="12" width="118" height="136" rx="4" fill="#FDF6E3" transform="rotate(-4 87 80)"/>
+        <rect x="44" y="34" width="86" height="8" rx="2" fill="#14213D" transform="rotate(-4 87 80)"/>
+        <rect x="44" y="52" width="86" height="8" rx="2" fill="#94A3B8" transform="rotate(-4 87 80)"/>
+        <rect x="44" y="70" width="86" height="8" rx="2" fill="#94A3B8" transform="rotate(-4 87 80)"/>
+        <rect x="44" y="88" width="60" height="8" rx="2" fill="#94A3B8" transform="rotate(-4 87 80)"/>
+        <line x1="30" y1="18" x2="150" y2="146" stroke="#C81E1E" stroke-width="14" stroke-linecap="round"/>
+        <line x1="150" y1="18" x2="30" y2="146" stroke="#C81E1E" stroke-width="14" stroke-linecap="round"/>
+        <rect x="140" y="104" width="58" height="12" rx="3" fill="#7C2D12" transform="rotate(28 169 110)"/>
+        <rect x="158" y="86" width="26" height="22" rx="3" fill="#92400E" transform="rotate(28 171 97)"/>
+        <text x="105" y="156" font-family="Arial,sans-serif" font-size="11" font-weight="900" fill="#FECACA" text-anchor="middle" letter-spacing="2">ANTALYA PACT — REJECTED</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- TOP-3 PANELS -->
+  <div class="top3">
+    <div class="panel p-ukr">
+      <div class="kick">UKRAINE &middot; OVERNIGHT INTO SUNDAY</div>
+      <div class="big">186</div>
+      <div class="head">drones over Ukraine</div>
+      <div class="txt">Dymer: 3 killed, 11 trapped in a collapsed block. Vyshneve: 3 killed, 15 wounded. 161 of 186 downed.</div>
+      <div class="tagrow"><span class="tag conf">CONFIRMED</span></div>
+    </div>
+    <div class="panel p-gulf">
+      <div class="kick">THE GULF &middot; SUNDAY</div>
+      <div class="big">01:42</div>
+      <div class="head">missile toward Mecca stopped</div>
+      <div class="txt">Coalition intercepts a Houthi missile. Bahrain demands UN action after Saturday's strike; 2 injured.</div>
+      <div class="tagrow"><span class="tag conf">CONFIRMED</span></div>
+    </div>
+    <div class="panel p-gaza">
+      <div class="kick">GAZA &middot; SUNDAY</div>
+      <div class="big">TALKS</div>
+      <div class="head">Hamas seeks emergency talks</div>
+      <div class="txt">Fri: 7 killed. Sat: 3 aid workers killed. Sun: mediators called in. No single Sunday toll.</div>
+      <div class="tagrow"><span class="tag rep">REPORTED</span></div>
+    </div>
+  </div>
+
+  <!-- GRID: 19 stories + region legend -->
+  <div class="grid">
+    <div class="cell c-red">
+      <div class="region">ASIA &middot; INDONESIA <span class="tag conf">CONFIRMED</span></div>
+      <div class="motif">34</div>
+      <div class="lbl">unaccounted in factory fire; 3 killed</div>
+    </div>
+    <div class="cell c-amber">
+      <div class="region">M. EAST &middot; IRAN <span class="tag conf">CONFIRMED</span></div>
+      <div class="motif">2h</div>
+      <div class="lbl">daily power cuts begin in Iran</div>
+    </div>
+    <div class="cell c-blue">
+      <div class="region">EUROPE &middot; FINLAND <span class="tag conf">CONFIRMED</span></div>
+      <div class="motif">FIRE OUT</div>
+      <div class="lbl">Sparta II listing, tow under way</div>
+    </div>
+    <div class="cell c-purple">
+      <div class="region">AFRICA &middot; SUDAN <span class="tag conf">CONFIRMED</span></div>
+      <div class="motif">4</div>
+      <div class="lbl">killed as drones hit UN building</div>
+    </div>
+    <div class="cell c-gold">
+      <div class="region">ASIA &middot; HONG KONG <span class="tag conf">CONFIRMED</span></div>
+      <div class="motif">98.79%</div>
+      <div class="lbl">turnout — 5,640 of 5,709 voters</div>
+    </div>
+    <div class="cell c-red">
+      <div class="region">ASIA &middot; INDIA <span class="tag conf">CONFIRMED</span></div>
+      <div class="motif">17</div>
+      <div class="lbl">dead in toxic-liquor tragedy</div>
+    </div>
+    <div class="cell c-teal">
+      <div class="region">AMERICAS &middot; PERU <span class="tag conf">CONFIRMED</span></div>
+      <div class="motif">1 &middot; 16</div>
+      <div class="lbl">dead, injured; 152 homes lost</div>
+    </div>
+    <div class="cell c-blue">
+      <div class="region">AFRICA &middot; NIGERIA <span class="tag conf">CONFIRMED</span></div>
+      <div class="motif">24</div>
+      <div class="lbl">dead, 24 rescued in boat capsize</div>
+    </div>
+    <div class="cell c-ink">
+      <div class="region">AMERICAS &middot; USA <span class="tag conf">CONFIRMED</span></div>
+      <div class="motif">PAUSED</div>
+      <div class="lbl">Washington halts gun checks</div>
+    </div>
+    <div class="cell c-green">
+      <div class="region">AMERICAS &middot; BRAZIL <span class="tag conf">CONFIRMED</span></div>
+      <div class="motif">STABLE</div>
+      <div class="lbl">Bolsonaro in ICU, Sunday bulletin</div>
+    </div>
+    <div class="cell c-gold">
+      <div class="region">EUROPE &middot; VATICAN <span class="tag conf">CONFIRMED</span></div>
+      <div class="motif">1,300</div>
+      <div class="lbl">poor share lunch with the Pope</div>
+    </div>
+    <div class="cell c-amber">
+      <div class="region">M. EAST &middot; LEBANON <span class="tag conf">CONFIRMED</span></div>
+      <div class="motif">83rd</div>
+      <div class="lbl">Independence Day; Ebba 1 killed</div>
+    </div>
+    <div class="cell c-teal">
+      <div class="region">ASIA &middot; NEPAL <span class="tag conf">CONFIRMED</span></div>
+      <div class="motif">DAY 1</div>
+      <div class="lbl">PM Balendra Shah visits India</div>
+    </div>
+    <div class="cell c-purple">
+      <div class="region">M. EAST &middot; USA <span class="tag rep">REPORTED</span></div>
+      <div class="motif">PRESSURE</div>
+      <div class="lbl">Trump favours economic squeeze</div>
+    </div>
+    <div class="cell c-ink">
+      <div class="region">AMERICAS &middot; USA <span class="tag rep">REPORTED</span></div>
+      <div class="motif">HOPE</div>
+      <div class="lbl">Christmas ceasefire hope reported</div>
+    </div>
+    <div class="cell c-red">
+      <div class="region">M. EAST &middot; IRAN <span class="tag rep">REPORTED</span></div>
+      <div class="motif">PATH OPEN</div>
+      <div class="lbl">End to conflict if US accepts terms</div>
+    </div>
+    <div class="cell c-amber">
+      <div class="region">M. EAST &middot; IRAN <span class="tag claim">CLAIM</span></div>
+      <div class="motif">MQ-1 &middot; MQ-9</div>
+      <div class="lbl">IRGC claims US drones in airspace</div>
+    </div>
+    <div class="cell c-blue">
+      <div class="region">M. EAST &middot; W. BANK <span class="tag conf">CONFIRMED</span></div>
+      <div class="motif">SEALED</div>
+      <div class="lbl">Ramallah encircled Sunday evening</div>
+    </div>
+    <div class="cell c-green">
+      <div class="region">EUROPE &middot; EU <span class="tag conf">CONFIRMED</span></div>
+      <div class="motif">CONDEMNS</div>
+      <div class="lbl">EU condemns Gaza ceasefire violations</div>
+    </div>
+    <div class="cell legend">
+      <div class="motif">7 REGIONS</div>
+      <div class="lbl">M. East 9 &middot; Asia 4 &middot; Europe 4</div>
+      <div class="sub2">Africa 2 &middot; Americas 5 &middot; Global 2 &middot; Sport 8</div>
+    </div>
+  </div>
+
+  <!-- SPORTS BAND: brightest row -->
+  <div class="sports">
+    <div class="shead">
+      <div class="t">SPORT &middot; SUNDAY</div>
+      <div class="d">The brightest row of the day — 8 results, all dated Sunday 22 November 2026</div>
+    </div>
+    <div class="srow">
+      <div class="sport s-cricket">
+        <div class="sc">720/9</div>
+        <div class="nm">INDIA DECLARE</div>
+        <div class="nt">Record Test total in NZ &middot; lead 352</div>
+      </div>
+      <div class="sport s-f1">
+        <div class="sc">+0.639s</div>
+        <div class="nm">VERSTAPPEN WINS</div>
+        <div class="nt">Las Vegas GP &middot; 75th win</div>
+      </div>
+      <div class="sport s-tennis">
+        <div class="sc">6–2, 7–6</div>
+        <div class="nm">ALCARAZ</div>
+        <div class="nt">Beats Zverev &middot; ATP Finals</div>
+      </div>
+      <div class="sport s-liv">
+        <div class="sc">4–0</div>
+        <div class="nm">LIVERPOOL</div>
+        <div class="nt">Rout Man Utd &middot; Anfield</div>
+      </div>
+      <div class="sport s-leeds">
+        <div class="sc">4–1</div>
+        <div class="nm">LEEDS</div>
+        <div class="nt">Stun Chelsea &middot; Bridge</div>
+      </div>
+      <div class="sport s-ars">
+        <div class="sc">2–2</div>
+        <div class="nm">ARSENAL</div>
+        <div class="nt">Held by Newcastle</div>
+      </div>
+      <div class="sport s-city">
+        <div class="sc">1–1</div>
+        <div class="nm">MAN CITY</div>
+        <div class="nt">Held by Fulham</div>
+      </div>
+      <div class="sport s-ata">
+        <div class="sc">4–4</div>
+        <div class="nm">ATALANTA</div>
+        <div class="nt">Inter in 8-goal draw</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALSO -->
+  <div class="also">
+    <div class="box">
+      <div class="h">ALSO &middot; FOLLOW-UP</div>
+      <div class="b">Guasave: tense calm after the El Chapo Isidro capture (Sat) — no new Sunday development.</div>
+    </div>
+    <div class="box">
+      <div class="h">ALSO &middot; MARKETS</div>
+      <div class="b">Bitcoin back above $60,000 — $61,271 after Saturday&rsquo;s $55.1k flush. Gold $3,514, worst week since March.</div>
+    </div>
+  </div>
+
+  <!-- UTC STRIP -->
+  <div class="utc">
+    <div class="h">UTC</div>
+    <div class="items"><b>00:00</b> Sudan drones &nbsp;·&nbsp; <b>01:42</b> Mecca missile &nbsp;·&nbsp; <b>03:56</b> Cikande 34 &nbsp;·&nbsp; <b>05:00</b> Dymer strike &nbsp;·&nbsp; <b>05:31</b> F1 Verstappen &nbsp;·&nbsp; <b>06:00</b> COP31 vote due, slipped &nbsp;·&nbsp; <b>07:34</b> Nigeria 24 &nbsp;·&nbsp; <b>evening</b> Ramallah sealed</div>
+  </div>
+
+  <!-- DATE CHECK -->
+  <div class="datecheck">
+    <div class="h">DATE CHECK — NOT SUNDAY, SO NOT DRAWN AS SUNDAY NEWS</div>
+    <div class="b">England rugby 37–12 (Sat) &middot; Wembanyama 50 (Sat night) &middot; Belgium strike (Mon) &middot; BepiColombo (Sat) &middot; Gaza aid-van (Sat) &middot; FBI breach (Fri) &middot; Hormuz tankers (Sat)</div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div>Sources: CNN &middot; Reuters &middot; AP &middot; AFP &middot; INDECI &middot; Finnish Border Guard &middot; ESPNcricinfo &middot; formula1.com &middot; UKMTO &middot; NEMA &middot; Vatican News</div>
+    <div class="r">All stories dated Sunday 22 November 2026<br>CONFIRMED = 2+ sources &middot; REPORTED = announced &middot; CLAIM = unconfirmed</div>
+  </div>
+
+</div>
+</body>
+</html>
